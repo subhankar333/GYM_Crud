@@ -20,19 +20,24 @@ body {
 
 .navbar ul li {
     display: inline; 
-    margin-right: 88%; 
+    margin-right: 100px; 
     gap: 25px;
 }
 
-.navbar ul li a {
+.nav-link {
     color: #fff; 
     text-decoration: none; 
     font-size: 18px; 
     padding: 10px 15px; 
     transition: all 0.3s ease; 
+    cursor: pointer;
 }
 
 .navbar ul li a:hover {
     background-color: #333; 
+}
+
+#sign-up{
+    margin-left:1200px;
 }
 
