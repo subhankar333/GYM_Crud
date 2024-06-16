@@ -15,6 +15,14 @@
     z-index: -1;
 }
 
+.search-inp{
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+}
 
 #members-container {
     display: flex;

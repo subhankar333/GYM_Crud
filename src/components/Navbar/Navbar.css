@@ -40,4 +40,14 @@ body {
 #sign-up{
     margin-left:1200px;
 }
+#log-icon{
+    margin-left: 25%;
+    width: 7%;
+    background: rgb(252, 82, 82);
+}
 
+#logout2{
+    margin-left: 25%;
+    width: 7%;
+    background: rgb(252, 82, 82);
+}

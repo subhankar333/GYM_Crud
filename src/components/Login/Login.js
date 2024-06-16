@@ -38,6 +38,7 @@ export default function Login(){
             console.log(res)
             sessionStorage.setItem("isAdmin", res.isAdmin);
             sessionStorage.setItem("name", res.username);
+            sessionStorage.setItem("userId", res.userId);
             alert("Login Success ✔" + res.username)
             navigate('/admin')
           })

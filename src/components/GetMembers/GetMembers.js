@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function GetMembers()
 {
     var [members, setMembers] = useState([]);
+    var [searchTerm,setSearchTerm] = useState('');
     var navigate = useNavigate();
 
     function formatDate(date) {
@@ -50,10 +51,19 @@ export default function GetMembers()
         }
     }
 
+    const filteredMembers = members.filter(member =>
+        member.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return(
         <div className="get-member-page" id="members-container">
-            <img src={bg_img} className="img-bg"/> 
-            {members.map((member,index) => (
+            <img src={bg_img} className="img-bg"/>
+            <div className="search-bar">
+                <input type="text" placeholder="Search by name" value={searchTerm}
+                 onChange={(e) => setSearchTerm(e.target.value)} className="search-inp"
+                />
+            </div>
+            {filteredMembers.map((member,index) => (
                 <div key={index} className="member-card">
                 <div className="ne-details">
                     <p>Name: <b>{member.name}</b></p>
