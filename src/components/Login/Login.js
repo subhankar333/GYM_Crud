@@ -37,8 +37,9 @@ export default function Login(){
           .then(res => {
             console.log(res)
             sessionStorage.setItem("isAdmin", res.isAdmin);
+            sessionStorage.setItem("name", res.username);
             alert("Login Success ✔" + res.username)
-            navigate('/home')
+            navigate('/admin')
           })
           .catch(err => {
             console.log(err)

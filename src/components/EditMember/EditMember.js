@@ -1,29 +1,48 @@
-import React,{useState} from "react";
-import { useNavigate } from "react-router-dom";
-import './AddMember.css';
-import bg_img from '../Home/Images/gym_bg.webp'
+import React,{useState, useEffect} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import './EditMember.css';
+import bg_img from '../Home/Images/gym_bg.webp';
+import axios from "axios";
 
 
-export default function AddMember(){
+export default function EditMember(){
     var [name, setName] = useState("");
     var [email, setEmail] = useState("");
     var [phone, setPhone] = useState("");
     var [expiry, setExpiry] = useState();
     var [doj, setDoj] = useState();
+    var [member,setMember] = useState(null);
 
+    const {memberId} = useParams()
     var navigate = useNavigate();
+
+    var user = {};
+
+    useEffect(()=>{
+        axios.get(`https://localhost:7999/api/Member/GetMember/memberId?memberId=${memberId}`)
+        .then(function(res){
+            console.log(res.data);
+            setMember(res.data)
+            setName(res.data.name)
+            setEmail(res.data.email)
+            setPhone(res.data.phone)
+            setExpiry(res.data.membershipExpiry)
+            setDoj(res.data.doj)
+        }).catch(function(err){
+            console.log(err);
+        })
+    },[memberId])
 
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
     const minDateTime = currentDate.toISOString().slice(0, 16);
 
 
-    var user = {};
-
-    function add(e)
+    function edit(e)
     {
         e.preventDefault();
 
+        user.memberId = memberId;
         user.name = name;
         user.email = email;
         user.phone = phone;
@@ -31,30 +50,30 @@ export default function AddMember(){
         user.doj = doj;
 
         var RequestOption = {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(user)
           }
       
-          fetch("https://localhost:7999/api/Member/AddMember", RequestOption)
+          fetch("https://localhost:7999/api/Member", RequestOption)
           .then(res => res.json())
           .then(res => {
             console.log(res)
-            alert("Member added successfully")
+            alert("Member updated successfully")
             navigate('/admin/get-members')
           })
           .catch(err => {
             console.log(err)
-            alert("Error adding the member")
+            alert("Error updating the member")
           })
     }
    
 
     return(
-        <div className="add-member-page">
+        <div className="edit-member-page">
             <img src={bg_img} className="img-bg"/> 
             <div className="form-container">
-                <h2>Add Member</h2>
+                <h2>Edit Member</h2>
                 <form>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -76,7 +95,7 @@ export default function AddMember(){
                         <label htmlFor="doj">DOJ</label>
                         <input type="datetime-local" id="doj" name="doj" min={minDateTime} value={doj} onChange={(e) => setDoj(e.target.value)} />
                     </div>
-                    <button type="submit" onClick={add}>Add</button>
+                    <button type="submit" onClick={edit}>Update</button>
                 </form>
             </div>
         </div>

@@ -15,8 +15,11 @@ export default function Navbar(){
         <nav className="navbar">
             <ul>
                 <li><Link to='/home' className="nav-link">Gym49</Link></li>
-                {isAdmin && 
+                {isAdmin && <>
                     <li><Link to='admin/add-member' className="nav-link">Add Member</Link></li>
+                    <li><Link to='admin/get-members' className="nav-link">Get Members</Link></li>
+                   </>
+  
                 }
                 <li><Link to='/register' className="nav-link" id={` ${isAdmin ? 'sign-up' : 'sign-up2'}`}>SignUp</Link></li>
                 

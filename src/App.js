@@ -6,6 +6,9 @@ import Register from './components/Register/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import logo from './logo.svg';
 import {BrowserRouter , Routes, Route} from "react-router-dom"
+import AdminHome from './components/AdminHome/AdminHome';
+import GetMembers from './components/GetMembers/GetMembers';
+import EditMember from './components/EditMember/EditMember';
 
 function App() {
   return (
@@ -17,8 +20,11 @@ function App() {
                 <Route path="home" element={<HomeComponent />} />
                 <Route path='register' element={<Register/>} />
                 <Route path='login' element={<Login/>} />
-                <Route path="admin/" element={<PrivateRoute />}>
+                <Route path="admin/*" element={<PrivateRoute />}>
+                  <Route index element={<AdminHome/>} />
                   <Route path="add-member" element={<AddMember/>} />
+                  <Route path="get-members" element={<GetMembers/>} />
+                  <Route path='edit/:memberId' element={<EditMember/>}/>
                 </Route>
             </Route>
        </Routes>
