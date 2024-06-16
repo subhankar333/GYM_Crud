@@ -8,7 +8,9 @@ export default function AdminHome(){
     return(
         <div className="home">
             <img src={bg_img} className="img-bg"/> 
-            
+            <div className="home-content">
+                    <h2>Welcome back to Gym49, {sessionStorage.getItem('name')} 😎</h2>
+            </div>
         </div>
     )
 }
